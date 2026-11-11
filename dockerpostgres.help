@@ -1,0 +1,9 @@
+docker run -d \
+  --name blazorshop-postgres \
+  --restart unless-stopped \
+  -e POSTGRES_DB=blazorshop \
+  -e POSTGRES_USER=blazorshop \
+  -e POSTGRES_PASSWORD='ChangeThis_StrongPassword123!' \
+  -p 5432:5432 \
+  -v blazorshop-postgres-local:/var/lib/postgresql/data \
+  postgres:16

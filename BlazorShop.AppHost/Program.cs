@@ -6,22 +6,22 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 try
 {
-    var postgres = builder.AddPostgres("postgres");
+    //var postgres = builder.AddPostgres("postgres");
 
-    var useVolumes = !bool.TryParse(builder.Configuration["UseVolumes"], out var configuredUseVolumes)
-        || configuredUseVolumes;
-    if (useVolumes)
-    {
-        postgres.WithDataVolume("blazorshop-postgres-data", isReadOnly: false);
-    }
+    // var useVolumes = !bool.TryParse(builder.Configuration["UseVolumes"], out var configuredUseVolumes)
+    //     || configuredUseVolumes;
+    // if (useVolumes)
+    // {
+    //     postgres.WithDataVolume("blazorshop-postgres-data", isReadOnly: false);
+    // }
 
-    var postgresImageTag = builder.Configuration["PostgresImageTag"];
-    if (!string.IsNullOrWhiteSpace(postgresImageTag))
-    {
-        postgres.WithImageTag(postgresImageTag);
-    }
+    // var postgresImageTag = builder.Configuration["PostgresImageTag"];
+    // if (!string.IsNullOrWhiteSpace(postgresImageTag))
+    // {
+    //     postgres.WithImageTag(postgresImageTag);
+    // }
 
-    var database = postgres.AddDatabase("DefaultConnection", "blazorshop");
+    //var database = postgres.AddDatabase("DefaultConnection", "blazorshop");
 
     var apiLaunchProfile = builder.Configuration["ApiLaunchProfile"];
     var apiService = string.IsNullOrWhiteSpace(apiLaunchProfile)
@@ -29,9 +29,9 @@ try
         : builder.AddProject<Projects.BlazorShop_API>("apiservice", apiLaunchProfile);
 
     apiService
-        .WithExternalHttpEndpoints()
-        .WithReference(database)
-        .WaitFor(database);
+        .WithExternalHttpEndpoints();
+        //.WithReference(database)
+        //.WaitFor(database);
 
     builder.AddProject<Projects.BlazorShop_Storefront>("storefront")
         .WithExternalHttpEndpoints()
