@@ -2,7 +2,7 @@
 @inject StorefrontApiClient ApiClient
 @inject IStorefrontClientAppUrlResolver ClientAppUrlResolver
 
-<PageTitle>My Cart</PageTitle>
+<PageTitle>سبد خرید</PageTitle>
 
 <HeadContent>
     <meta name="robots" content="noindex,nofollow" />
@@ -11,11 +11,11 @@
 <div class="bs-v2-container bs-v2-cart">
     <header class="bs-v2-cart-intro">
         <div>
-            <p class="bs-v2-eyebrow">Your bag</p>
-            <h1>My Cart</h1>
-            <p>Review your items before continuing to checkout.</p>
+            <p class="bs-v2-eyebrow">کیف شما</p>
+            <h1>سبد خرید</h1>
+            <p>محصولات خود را قبل از ادامه به پرداخت مرور کنید.</p>
         </div>
-        <span class="bs-v2-count" role="status">@ItemCount item@(ItemCount == 1 ? string.Empty : "s") in cart</span>
+        <span class="bs-v2-count" role="status">@ItemCount محصول@(ItemCount == 1 ? string.Empty : " ها") در سبد خرید</span>
     </header>
 
     @foreach (var alert in Alerts)
@@ -26,15 +26,15 @@
     }
 
     <div class="bs-v2-cart-layout">
-        <section class="bs-v2-cart-panel" aria-label="Cart items">
+        <section class="bs-v2-cart-panel" aria-label="موارد سبد خرید">
             @if (Lines.Count == 0)
             {
                 <div class="bs-v2-cart-empty" role="status">
-                    <h2>Your cart is empty</h2>
-                    <p>Add products from the storefront to review them here before checkout.</p>
+                    <h2>سبد خرید شما خالی است</h2>
+                    <p>محصولاتی از فروشگاه را اضافه کنید تا قبل از پرداخت در اینجا بررسی شوند.</p>
                     <div class="bs-v2-cart-empty-actions">
-                        <a href="@StorefrontRoutes.NewReleases" class="bs-v2-button bs-v2-button-primary">Shop New Releases</a>
-                        <a href="@StorefrontRoutes.TodaysDeals" class="bs-v2-button bs-v2-button-secondary">See Today's Deals</a>
+                        <a href="@StorefrontRoutes.NewReleases" class="bs-v2-button bs-v2-button-primary">خرید از جدیدترین‌ها</a>
+                        <a href="@StorefrontRoutes.TodaysDeals" class="bs-v2-button bs-v2-button-secondary">مشاهده تخفیف‌ها</a>
                     </div>
                 </div>
             }
@@ -55,7 +55,7 @@
                             }
                             else
                             {
-                                <span class="bs-v2-image-placeholder">No image available</span>
+                                <span class="bs-v2-image-placeholder">تصویر موجود نیست</span>
                             }
                         </div>
                         <div class="bs-v2-cart-product">
@@ -75,27 +75,27 @@
                             }
                             @if (line.IsUnavailable)
                             {
-                                <p class="bs-v2-cart-unavailable">This item is unavailable or could not be refreshed. Review it before checkout.</p>
+                                <p class="bs-v2-cart-unavailable">این کالا ناموجود است یا به‌روزرسانی نشد. قبل از پرداخت آن را بررسی کنید.</p>
                             }
                             @if (!string.IsNullOrWhiteSpace(line.ProductUrl))
                             {
-                                <a href="@line.ProductUrl" class="bs-v2-cart-product-link">View Product</a>
+                                <a href="@line.ProductUrl" class="bs-v2-cart-product-link">مشاهده کالا</a>
                             }
                         </div>
                         <div class="bs-v2-cart-line-controls">
                             <dl class="bs-v2-cart-prices">
-                                <div><dt>Unit Price</dt><dd>EUR @line.UnitPriceDisplay</dd></div>
-                                <div><dt>Line Total</dt><dd>@line.LineTotalDisplay</dd></div>
+                                <div><dt>قیمت واحد</dt><dd>@line.UnitPriceDisplay تومان</dd></div>
+                                <div><dt>جمع ردیف</dt><dd>@line.LineTotalDisplay</dd></div>
                             </dl>
                             <div class="bs-v2-cart-line-actions">
                                 <div class="bs-v2-cart-quantity">
-                                    <label for="@quantityId">Quantity</label>
+                                    <label for="@quantityId">تعداد</label>
                                     <input id="@quantityId"
                                            type="number"
                                            min="1"
                                            step="1"
                                            value="@line.Quantity"
-                                           aria-label="Quantity for @line.DisplayName @line.VariantLabel"
+                                           aria-label="تعداد برای @line.DisplayName @line.VariantLabel"
                                            data-storefront-cart-quantity
                                            data-product-id="@line.ProductId"
                                            data-variant-id="@line.VariantId"
@@ -109,31 +109,31 @@
                                         data-product-id="@line.ProductId"
                                         data-variant-id="@line.VariantId"
                                         data-product-name="@line.DisplayName"
-                                        data-size-value="@line.SizeValue">Remove</button>
+                                        data-size-value="@line.SizeValue">حذف</button>
                             </div>
                         </div>
                     </article>
                 }
 
-                <p class="bs-v2-cart-notice">Prices shown are informational. The server revalidates products, variants, prices and stock at checkout.</p>
+                <p class="bs-v2-cart-notice">قیمت‌ها به‌صورت اطلاعاتی نمایش داده می‌شوند. سرور در زمان پرداخت دوباره محصولات، سایزها، قیمت‌ها و موجودی را بررسی می‌کند.</p>
             }
         </section>
 
         <aside class="bs-v2-cart-summary" aria-labelledby="cart-summary-heading">
-            <h2 id="cart-summary-heading">Order Summary</h2>
+            <h2 id="cart-summary-heading">خلاصه سفارش</h2>
             <dl class="bs-v2-cart-totals">
-                <div><dt>Items</dt><dd>@ItemCount</dd></div>
-                <div><dt>Subtotal</dt><dd>@GrandTotalDisplay</dd></div>
-                <div class="bs-v2-cart-total"><dt>Total</dt><dd>@GrandTotalDisplay</dd></div>
+                <div><dt>تعداد</dt><dd>@ItemCount</dd></div>
+                <div><dt>جمع جزء</dt><dd>@GrandTotalDisplay</dd></div>
+                <div class="bs-v2-cart-total"><dt>کل</dt><dd>@GrandTotalDisplay</dd></div>
             </dl>
             <div class="bs-v2-cart-summary-actions">
                 @if (Lines.Count > 0)
                 {
-                    <a href="@CheckoutUrl" class="bs-v2-button bs-v2-button-primary">Continue to Checkout</a>
-                    <p>Checkout continues with your account.</p>
-                    <button type="button" data-storefront-cart-clear class="bs-v2-button bs-v2-button-secondary">Clear Cart</button>
+                    <a href="@CheckoutUrl" class="bs-v2-button bs-v2-button-primary">ادامه به پرداخت</a>
+                    <p>ادامه پرداخت با حساب شما انجام می‌شود.</p>
+                    <button type="button" data-storefront-cart-clear class="bs-v2-button bs-v2-button-secondary">پاک‌سازی سبد</button>
                 }
-                <a href="@StorefrontRoutes.NewReleases" class="bs-v2-button bs-v2-button-secondary">Continue Shopping</a>
+                <a href="@StorefrontRoutes.NewReleases" class="bs-v2-button bs-v2-button-secondary">ادامه خرید</a>
             </div>
         </aside>
     </div>

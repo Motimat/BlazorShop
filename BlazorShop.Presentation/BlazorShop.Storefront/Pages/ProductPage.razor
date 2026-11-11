@@ -9,13 +9,13 @@
 
 @if (_isServiceUnavailable)
 {
-    <ServiceUnavailableState Title="Product temporarily unavailable"
-                             Message="The storefront is running, but the catalog API is not reachable right now. Start the API project or AppHost and refresh this page." />
+    <ServiceUnavailableState Title="محصول موقتاً در دسترس نیست"
+                             Message="فروشگاه در حال اجرا است، اما API کاتالوگ در این لحظه در دسترس نیست. پروژه را اجرا کنید و صفحه را تازه‌سازی کنید." />
 }
 else if (_isNotFound)
 {
-    <NotFoundState Title="Product not found"
-                   Message="We couldn't find a published product for this address." />
+    <NotFoundState Title="محصول پیدا نشد"
+                   Message="محصول منتشرشده‌ای برای این آدرس پیدا نشد." />
 }
 else if (_product is not null)
 {
@@ -23,7 +23,7 @@ else if (_product is not null)
         <BreadcrumbNav Items="_breadcrumbs" ClassName="bs-v2-route-breadcrumb" />
 
         <div class="bs-v2-detail-layout">
-            <section class="bs-v2-detail-gallery" aria-label="Product image">
+            <section class="bs-v2-detail-gallery" aria-label="تصویر محصول">
                 <div class="bs-v2-detail-image">
                     @if (!string.IsNullOrWhiteSpace(_product.Image))
                     {
@@ -31,7 +31,7 @@ else if (_product is not null)
                     }
                     else
                     {
-                        <span class="bs-v2-image-placeholder" role="img" aria-label="No product image available">No image available</span>
+                        <span class="bs-v2-image-placeholder" role="img" aria-label="تصویر محصول موجود نیست">تصویر موجود نیست</span>
                     }
                 </div>
             </section>
@@ -48,13 +48,13 @@ else if (_product is not null)
 
                 @if (IsFreshArrival)
                 {
-                    <span class="bs-v2-detail-new">New arrival</span>
+                    <span class="bs-v2-detail-new">جدید</span>
                 }
 
                 <h1 id="product-title">@_product.Name</h1>
                 <p class="bs-v2-detail-price-label">@PrimaryPriceLabel</p>
                 <p class="bs-v2-detail-price">€ @_product.Price</p>
-                <p class="bs-v2-detail-variant-summary">@(_product.Variants.Count() == 1 ? "1 option" : VariantSummary)</p>
+                <p class="bs-v2-detail-variant-summary">@(_product.Variants.Count() == 1 ? "1 گزینه" : VariantSummary)</p>
 
                 @if (!string.IsNullOrWhiteSpace(_product.Description))
                 {
@@ -62,15 +62,15 @@ else if (_product is not null)
                 }
 
                 <div id="purchase" class="bs-v2-detail-purchase">
-                    <h2>Add to Cart</h2>
+                    <h2>افزودن به سبد خرید</h2>
                     <p>@PurchaseMessage</p>
                     @if (_product.Variants.Any())
                     {
                         <div class="bs-v2-detail-field">
-                            <label for="product-variant-select">Choose a variant</label>
+                            <label for="product-variant-select">انتخاب سایز</label>
                             <select id="product-variant-select"
                                     data-storefront-variant-select>
-                                <option value="">Select a size</option>
+                                <option value="">انتخاب سایز</option>
                                 @foreach (var variant in _product.Variants)
                                 {
                                     <option value="@variant.Id"
@@ -87,16 +87,16 @@ else if (_product is not null)
                         <button type="button"
                                 class="bs-v2-button bs-v2-button-primary"
                                 data-storefront-add-to-cart
-                                data-default-label="Add to Cart"
-                                data-success-label="Added"
+                                data-default-label="افزودن به سبد خرید"
+                                data-success-label="اضافه شد"
                                 data-product-id="@_product.Id"
                                 data-product-name="@_product.Name"
                                 data-unit-price="@BaseUnitPriceValue"
                                 data-variant-select="@(_product.Variants.Any() ? "#product-variant-select" : null)"
                                 data-feedback-target="#product-cart-feedback">
-                            Add to Cart
+                            افزودن به سبد خرید
                         </button>
-                        <a href="@CartUrl" class="bs-v2-button bs-v2-button-secondary">View Cart</a>
+                        <a href="@CartUrl" class="bs-v2-button bs-v2-button-secondary">مشاهده سبد خرید</a>
                     </div>
                     <p id="product-cart-feedback" class="bs-v2-detail-feedback" aria-live="polite"></p>
                 </div>
@@ -104,7 +104,7 @@ else if (_product is not null)
                 @if (_product.Variants.Any())
                 {
                     <section class="bs-v2-detail-variants" aria-labelledby="product-variants-title">
-                        <h2 id="product-variants-title">Available Variants</h2>
+                        <h2 id="product-variants-title">گزینه‌های موجود</h2>
                         <ul>
                             @foreach (var variant in _product.Variants)
                             {
@@ -118,45 +118,45 @@ else if (_product is not null)
                     </section>
                 }
 
-                <nav class="bs-v2-detail-links" aria-label="More shopping options">
+                <nav class="bs-v2-detail-links" aria-label="گزینه‌های بیشتر">
                     @if (!string.IsNullOrWhiteSpace(_product.Category?.Slug) && !string.IsNullOrWhiteSpace(_product.Category?.Name))
                     {
-                        <a href="@StorefrontRoutes.Category(_product.Category.Slug)" class="bs-v2-button bs-v2-button-secondary">Back to @_product.Category.Name</a>
+                        <a href="@StorefrontRoutes.Category(_product.Category.Slug)" class="bs-v2-button bs-v2-button-secondary">بازگشت به @_product.Category.Name</a>
                     }
-                    <a href="@StorefrontRoutes.NewReleases" class="bs-v2-button bs-v2-button-secondary">Browse New Releases</a>
-                    <a href="@StorefrontRoutes.TodaysDeals" class="bs-v2-button bs-v2-button-secondary">See Today's Deals</a>
+                    <a href="@StorefrontRoutes.NewReleases" class="bs-v2-button bs-v2-button-secondary">مرور جدیدترین‌ها</a>
+                    <a href="@StorefrontRoutes.TodaysDeals" class="bs-v2-button bs-v2-button-secondary">مشاهده تخفیف‌ها</a>
                 </nav>
 
                 <p class="bs-v2-detail-help">
-                    Questions about sizing, delivery, or returns? Visit
-                    <a href="@StorefrontRoutes.CustomerService">Customer Service</a> before you place your order.
+                    آیا درباره سایز، ارسال یا بازگشت سؤال دارید؟ به
+                    <a href="@StorefrontRoutes.CustomerService">پشتیبانی مشتری</a> مراجعه کنید قبل از ثبت سفارش.
                 </p>
             </section>
         </div>
 
         <SeoContentSection Title="@ProductSeoContentTitle"
-                           Eyebrow="Product Details"
+                           Eyebrow="محتوای محصول"
                            Content="@_product.SeoContent"
                            ClassName="bs-v2-route-seo" />
 
         <section class="bs-v2-related" aria-labelledby="related-products-title">
-            <p class="bs-v2-eyebrow">Keep Exploring</p>
+            <p class="bs-v2-eyebrow">ادامه خرید</p>
             @if (_relatedProducts.Count > 0)
             {
-                <h2 id="related-products-title">More from @_product.Category?.Name</h2>
+                <h2 id="related-products-title">بیشتر از @_product.Category?.Name</h2>
                 <ProductGrid Products="_relatedProducts"
-                             EmptyMessage="No additional related products are available right now." />
+                              EmptyMessage="هیچ محصول مرتبط دیگری در حال حاضر موجود نیست." />
             }
             else
             {
-                <h2 id="related-products-title">Keep browsing the public catalog</h2>
-                <nav class="bs-v2-detail-links" aria-label="Continue browsing">
+                <h2 id="related-products-title">مرور کاتالوگ عمومی</h2>
+                <nav class="bs-v2-detail-links" aria-label="ادامه خرید">
                     @if (!string.IsNullOrWhiteSpace(_product.Category?.Slug) && !string.IsNullOrWhiteSpace(_product.Category?.Name))
                     {
-                        <a href="@StorefrontRoutes.Category(_product.Category.Slug)" class="bs-v2-button bs-v2-button-secondary">Explore @_product.Category.Name</a>
+                        <a href="@StorefrontRoutes.Category(_product.Category.Slug)" class="bs-v2-button bs-v2-button-secondary">کاوش @_product.Category.Name</a>
                     }
-                    <a href="@StorefrontRoutes.NewReleases" class="bs-v2-button bs-v2-button-primary">Browse New Releases</a>
-                    <a href="@StorefrontRoutes.TodaysDeals" class="bs-v2-button bs-v2-button-secondary">See Today's Deals</a>
+                    <a href="@StorefrontRoutes.NewReleases" class="bs-v2-button bs-v2-button-primary">مرور جدیدترین‌ها</a>
+                    <a href="@StorefrontRoutes.TodaysDeals" class="bs-v2-button bs-v2-button-secondary">مشاهده تخفیف‌ها</a>
                 </nav>
             }
         </section>

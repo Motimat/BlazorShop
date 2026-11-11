@@ -9,7 +9,8 @@
     --bs-v2-surface: #f8fafc;
     --bs-storefront-page-background: #fff;
     overflow-x: clip;
-    font-family: "Segoe UI Variable Text","Segoe UI",Inter,system-ui,sans-serif;
+    /*font-family: "Segoe UI Variable Text","Segoe UI",Inter,system-ui,sans-serif;*/
+    font-family: "Vazirmatn","Segoe UI Variable Text","Segoe UI","Tahoma",sans-serif;
     font-weight: 400;
     letter-spacing: -.006em;
     line-height: 1.5;

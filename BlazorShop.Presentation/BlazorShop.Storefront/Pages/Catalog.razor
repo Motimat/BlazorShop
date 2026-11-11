@@ -7,46 +7,46 @@
 <div class="bs-v2-container bs-v2-catalog @(_query.SearchTerm is null ? null : "bs-v2-catalog-search")">
     @if (_unavailable)
     {
-        <ServiceUnavailableState Title="Catalog is temporarily unavailable" Message="We couldn't load the catalog. Please try again shortly." />
-        <a class="bs-v2-button bs-v2-button-secondary" href="@_query.Url()">Try again</a>
+        <ServiceUnavailableState Title="کاتالوگ موقتاً در دسترس نیست" Message="کاتالوگ در حال بارگذاری است. لطفاً کمی بعد دوباره امتحان کنید." />
+        <a class="bs-v2-button bs-v2-button-secondary" href="@_query.Url()">تلاش مجدد</a>
     }
     else if (_notFound)
     {
-        <NotFoundState Title="Catalog page not found" Message="This category, search or page isn't available. Start again with the catalog." />
-        <a class="bs-v2-button bs-v2-button-primary" href="@StorefrontRoutes.Catalog">Browse catalog</a>
+        <NotFoundState Title="صفحه کاتالوگ پیدا نشد" Message="این دسته‌بندی، جستجو یا صفحه موجود نیست. دوباره از ابتدا شروع کنید." />
+        <a class="bs-v2-button bs-v2-button-primary" href="@StorefrontRoutes.Catalog">مرور کاتالوگ</a>
     }
     else
     {
-        <nav class="bs-v2-catalog-breadcrumbs" aria-label="Breadcrumb">
-            <a href="@StorefrontRoutes.Home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Catalog</span>
+        <nav class="bs-v2-catalog-breadcrumbs" aria-label="مسیر">
+            <a href="@StorefrontRoutes.Home">خانه</a><span aria-hidden="true">/</span><span aria-current="page">کاتالوگ</span>
         </nav>
         <header class="bs-v2-catalog-intro">
-            <p class="bs-v2-eyebrow">Browse &amp; discover</p>
-            <h1>@(_query.SearchTerm is null ? "Shop all products" : "Search results")</h1>
+            <p class="bs-v2-eyebrow">مرور و کشف</p>
+            <h1>@(_query.SearchTerm is null ? "همه محصولات" : "نتایج جستجو")</h1>
             @if (_query.SearchTerm is not null)
             {
-                <p>Results for <strong>“@_query.SearchTerm”</strong></p>
+                <p>نتایج برای <strong>“@_query.SearchTerm”</strong></p>
             }
             else
             {
-                <p>Explore the catalog and find your next favorite.</p>
+                <p>کاتالوگ را مرور کنید و محصول بعدی خود را پیدا کنید.</p>
             }
         </header>
         @if (_query.DefaultsApplied)
         {
-            <p class="bs-v2-catalog-notice" role="status">An unsupported sort or page was reset to its default.</p>
+            <p class="bs-v2-catalog-notice" role="status">یک مرتب‌سازی یا صفحه نامعتبر به پیش‌فرض بازگشت.</p>
         }
         <div class="bs-v2-catalog-layout">
-            <form class="bs-v2-catalog-filters" method="get" action="@StorefrontRoutes.Catalog" aria-label="Catalog filters">
-                <h2>Find products</h2>
+            <form class="bs-v2-catalog-filters" method="get" action="@StorefrontRoutes.Catalog" aria-label="فیلترهای کاتالوگ">
+                <h2>یافتن محصولات</h2>
                 <div class="bs-v2-catalog-field">
-                    <label for="catalog-query">Search products</label>
-                    <input id="catalog-query" name="q" type="search" value="@_query.SearchTerm" maxlength="@StorefrontCatalogQuery.MaxSearchLength" placeholder="Search by name or description" />
+                    <label for="catalog-query">جستجوی محصولات</label>
+                    <input id="catalog-query" name="q" type="search" value="@_query.SearchTerm" maxlength="@StorefrontCatalogQuery.MaxSearchLength" placeholder="جستجو بر اساس نام یا توضیحات" />
                 </div>
                 <div class="bs-v2-catalog-field">
-                    <label for="catalog-category">Category</label>
+                    <label for="catalog-category">دسته‌بندی</label>
                     <select id="catalog-category" name="category">
-                        <option value="" selected="@(!_query.CategoryId.HasValue)">All categories</option>
+                        <option value="" selected="@(!_query.CategoryId.HasValue)">همه دسته‌بندی‌ها</option>
                         @foreach (var category in _categories.OrderBy(category => category.Name))
                         {
                             <option value="@category.Id" selected="@(_query.CategoryId == category.Id)">@category.Name</option>
@@ -54,7 +54,7 @@
                     </select>
                 </div>
                 <div class="bs-v2-catalog-field">
-                    <label for="catalog-sort">Sort products</label>
+                    <label for="catalog-sort">مرتب‌سازی محصولات</label>
                     <select id="catalog-sort" name="sort">
                         @foreach (var option in StorefrontCatalogQuery.SortOptions)
                         {
@@ -63,26 +63,26 @@
                     </select>
                 </div>
                 <div class="bs-v2-catalog-filter-actions">
-                    <button type="submit" class="bs-v2-button bs-v2-button-primary">Apply filters</button>
-                    <a href="@StorefrontRoutes.Catalog" class="bs-v2-button bs-v2-button-secondary">Reset filters</a>
+                    <button type="submit" class="bs-v2-button bs-v2-button-primary">اعمال فیلترها</button>
+                    <a href="@StorefrontRoutes.Catalog" class="bs-v2-button bs-v2-button-secondary">بازنشانی فیلترها</a>
                 </div>
             </form>
             <section class="bs-v2-catalog-results" aria-labelledby="catalog-results-heading">
                 <div class="bs-v2-listing-toolbar">
-                    <h2 id="catalog-results-heading">@(_query.SearchTerm is null ? "Products" : "Matching products")</h2>
-                    <p class="bs-v2-count" role="status">@_page.TotalCount @(_page.TotalCount == 1 ? "product" : "products")</p>
+                    <h2 id="catalog-results-heading">@(_query.SearchTerm is null ? "محصولات" : "محصولات منطبق")</h2>
+                    <p class="bs-v2-count" role="status">@_page.TotalCount @_page.TotalCount محصول@( _page.TotalCount == 1 ? "" : "‌ها" )</p>
                 </div>
                 @if (_page.TotalCount > 0)
                 {
-                    <p class="bs-v2-catalog-range">Showing @(((_query.PageNumber - 1) * StorefrontCatalogQuery.PageSize) + 1)–@(((_query.PageNumber - 1) * StorefrontCatalogQuery.PageSize) + _page.Items.Count) of @_page.TotalCount</p>
+                    <p class="bs-v2-catalog-range">نمایش @(((_query.PageNumber - 1) * StorefrontCatalogQuery.PageSize) + 1) تا @(((_query.PageNumber - 1) * StorefrontCatalogQuery.PageSize) + _page.Items.Count)</p>
                 }
-                <ProductGrid Products="_page.Items" EmptyMessage="No products match your search or filters. Try a different term or reset the filters." />
+                <ProductGrid Products="_page.Items" EmptyMessage="هیچ محصولی با این فیلترها مطابق نیست. عبارت دیگری را امتحان کنید یا فیلترها را بازنشانی کنید." />
                 @if (_page.TotalPages > 1)
                 {
-                    <nav class="bs-v2-catalog-pagination" aria-label="Catalog pagination">
+                    <nav class="bs-v2-catalog-pagination" aria-label="صفحه‌بندی کاتالوگ">
                         @if (_query.PageNumber > 1)
                         {
-                            <a href="@_query.Url(_query.PageNumber - 1)" rel="prev" aria-label="Previous page">Previous</a>
+                            <a href="@_query.Url(_query.PageNumber - 1)" rel="prev" aria-label="صفحه قبلی">قبلی</a>
                         }
                         @{ var previousPage = 0; }
                         @foreach (var page in _query.PaginationPages(_page.TotalPages))
@@ -93,17 +93,17 @@
                             }
                             @if (page == _query.PageNumber)
                             {
-                                <span class="is-current" aria-current="page" aria-label="Page @(page)">@(page)</span>
+                                <span class="is-current" aria-current="page" aria-label="صفحه @(page)">@(page)</span>
                             }
                             else
                             {
-                                <a href="@_query.Url(page)" aria-label="Page @(page)">@(page)</a>
+                                <a href="@_query.Url(page)" aria-label="صفحه @(page)">@(page)</a>
                             }
                             previousPage = page;
                         }
                         @if (_query.PageNumber < _page.TotalPages)
                         {
-                            <a href="@_query.Url(_query.PageNumber + 1)" rel="next" aria-label="Next page">Next</a>
+                            <a href="@_query.Url(_query.PageNumber + 1)" rel="next" aria-label="صفحه بعدی">بعدی</a>
                         }
                     </nav>
                 }

@@ -9,8 +9,8 @@
 
 @if (_isServiceUnavailable)
 {
-    <ServiceUnavailableState Title="Catalog temporarily unavailable"
-                             Message="The storefront is running, but the catalog API is not reachable right now. Start the API project or AppHost and refresh this page." />
+    <ServiceUnavailableState Title="کاتالوگ موقتاً ناموجود است"
+                             Message="فروشگاه در حال اجرا است، اما API کاتالوگ در این لحظه در دسترس نیست. پروژه API یا AppHost را اجرا کنید و صفحه را تازه‌سازی نمایید." />
 }
 else
 {
@@ -18,12 +18,12 @@ else
         <div class="bs-v2-container">
             <div class="bs-v2-section-heading">
                 <div>
-                    <p class="bs-v2-eyebrow">Curated for you</p>
-                    <h2 id="home-products-heading">Latest Products</h2>
+                    <p class="bs-v2-eyebrow">برای شما انتخاب شده</p>
+                    <h2 id="home-products-heading">آخرین محصولات</h2>
                 </div>
-                <a href="@StorefrontRoutes.NewReleases">View all <span aria-hidden="true">→</span></a>
+                <a href="@StorefrontRoutes.NewReleases">مشاهده همه <span aria-hidden="true">→</span></a>
             </div>
-            <ProductGrid Products="_latestProducts" EmptyMessage="No published products are available yet." />
+            <ProductGrid Products="_latestProducts" EmptyMessage="هیچ محصول منتشرشده‌ای در حال حاضر وجود ندارد." />
         </div>
     </section>
 
@@ -31,10 +31,10 @@ else
         <div class="bs-v2-container">
             <div class="bs-v2-section-heading">
                 <div>
-                    <p class="bs-v2-eyebrow">Explore collections</p>
-                    <h2 id="home-categories-heading">Browse by Category</h2>
+                    <p class="bs-v2-eyebrow">کاوش مجموعه‌ها</p>
+                    <h2 id="home-categories-heading">مرور بر اساس دسته‌بندی</h2>
                 </div>
-                <a href="@StorefrontRoutes.NewReleases">New arrivals <span aria-hidden="true">→</span></a>
+                <a href="@StorefrontRoutes.NewReleases">محصولات جدید <span aria-hidden="true">→</span></a>
             </div>
 
             @if (FeaturedCategories.Count > 0)
@@ -45,14 +45,14 @@ else
                         <a href="@StorefrontRoutes.Category(category.Slug)" class="bs-v2-category-panel" aria-label="@category.Name">
                             <strong>@category.Name</strong>
                             <span>@GetCategorySummary(category)</span>
-                            <span class="bs-v2-category-link">Explore collection <span aria-hidden="true">→</span></span>
+                            <span class="bs-v2-category-link">مرور مجموعه <span aria-hidden="true">→</span></span>
                         </a>
                     }
                 </div>
             }
             else
             {
-                <div class="bs-v2-empty">No published categories are available right now.</div>
+                <div class="bs-v2-empty">در حال حاضر هیچ دسته‌بندی منتشرشده‌ای وجود ندارد.</div>
             }
         </div>
     </section>

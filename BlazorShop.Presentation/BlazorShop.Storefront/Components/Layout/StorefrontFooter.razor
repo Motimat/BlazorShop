@@ -5,42 +5,42 @@
         <div class="bs-v2-footer-grid">
             <div>
                 <a class="bs-v2-brand" href="@StorefrontRoutes.Home">Blazor<span>Shop</span></a>
-                <p>Discover products, explore collections and keep track of your orders with BlazorShop.</p>
+                <p>کشف محصولات، مرور مجموعه‌ها و پیگیری سفارش‌های خود با BlazorShop.</p>
             </div>
-            <nav aria-label="Footer shop navigation">
-                <h2>Shop</h2>
-                <a href="@StorefrontRoutes.Home">Home</a>
-                <a href="@StorefrontRoutes.Catalog">Catalog</a>
-                <a href="@StorefrontRoutes.NewReleases">New Releases</a>
-                <a href="@StorefrontRoutes.TodaysDeals">Today's Deals</a>
-                <a href="@StorefrontRoutes.Cart">Cart</a>
+            <nav aria-label="ناوبری فروشگاه در فوتر">
+                <h2>فروشگاه</h2>
+                <a href="@StorefrontRoutes.Home">خانه</a>
+                <a href="@StorefrontRoutes.Catalog">کاتالوگ</a>
+                <a href="@StorefrontRoutes.NewReleases">جدیدترین‌ها</a>
+                <a href="@StorefrontRoutes.TodaysDeals">تخفیف‌ها</a>
+                <a href="@StorefrontRoutes.Cart">سبد خرید</a>
             </nav>
-            <nav aria-label="Footer support navigation">
-                <h2>Support</h2>
-                <a href="@StorefrontRoutes.CustomerService">Customer Service</a>
-                <a href="@StorefrontRoutes.Faq">FAQ</a>
-                <a href="@StorefrontRoutes.About">About</a>
+            <nav aria-label="ناوبری پشتیبانی در فوتر">
+                <h2>پشتیبانی</h2>
+                <a href="@StorefrontRoutes.CustomerService">پشتیبانی مشتری</a>
+                <a href="@StorefrontRoutes.Faq">سوالات متداول</a>
+                <a href="@StorefrontRoutes.About">درباره ما</a>
             </nav>
-            <nav aria-label="Footer information navigation">
-                <h2>Information</h2>
+            <nav aria-label="ناوبری اطلاعات در فوتر">
+                <h2>اطلاعات</h2>
                 @if (_session.IsAuthenticated)
                 {
-                    <a href="@ClientAppUrlResolver.ResolveUrl("/account")">My Account</a>
+                    <a href="@ClientAppUrlResolver.ResolveUrl("/account")">حساب من</a>
                     @if (_session.IsAdmin)
                     {
-                        <a href="@ClientAppUrlResolver.ResolveUrl("/admin")">Admin Panel</a>
+                        <a href="@ClientAppUrlResolver.ResolveUrl("/admin")">پنل ادمین</a>
                     }
                 }
                 else
                 {
-                    <a href="@StorefrontRoutes.SignIn">Sign in</a>
-                    <a href="@StorefrontRoutes.Register">Register</a>
+                    <a href="@StorefrontRoutes.SignIn">ورود</a>
+                    <a href="@StorefrontRoutes.Register">ثبت‌نام</a>
                 }
-                <a href="@StorefrontRoutes.Privacy">Privacy</a>
-                <a href="@StorefrontRoutes.Terms">Terms</a>
+                <a href="@StorefrontRoutes.Privacy">حریم خصوصی</a>
+                <a href="@StorefrontRoutes.Terms">قوانین و شرایط</a>
             </nav>
         </div>
-        <p class="bs-v2-footer-copyright">© @DateTime.UtcNow.Year BlazorShop. All rights reserved.</p>
+        <p class="bs-v2-footer-copyright">© @DateTime.UtcNow.Year BlazorShop. تمامی حقوق محفوظ است.</p>
     </div>
 </footer>
 
